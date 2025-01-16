@@ -1,4 +1,27 @@
-const express = require('express');
+import express from "express";
+import { router } from "./router";
+
+export class App {
+    public server: express.Application;
+
+    constructor() {
+        this.server = express();
+        this.middleware();
+        this.router();
+    }
+
+    private middleware() {
+        this.server.use(express.json());
+    }
+
+    private router() {
+        this.server.use(router);
+    }
+}
+
+//const express = require('express');
+/*
+import express from 'express'
 const app = express();
 
 app.get('/', (req, res) => {
@@ -19,6 +42,7 @@ const port = 3230
 app.listen(port, () => {
     console.log(`Server Listen on port ${port}`)
 })
+    */
 /*
 const io = new Server(server, {
     cors: {
