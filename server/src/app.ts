@@ -1,9 +1,13 @@
+//Import Express
 import express from "express";
+//Import router
 import { router } from "./router";
-
+//Create module and class App to create and initialize 
+// a express Application
 export class App {
     public server: express.Application;
 
+    //Initialize server, middleware and router.
     constructor() {
         this.server = express();
         this.middleware();
