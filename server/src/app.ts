@@ -2,24 +2,30 @@
 import express from "express";
 //Import router
 import { router } from "./router";
+//Import lib to  fundamental security mechanism 
+// implemented by web browsers to prevent unauthorized 
+// access to resources on a web page from different origin
+import cors from 'cors'
+
 //Create module and class App to create and initialize 
 // a express Application
 export class App {
-    public server: express.Application;
+    public app: express.Application;
 
     //Initialize server, middleware and router.
     constructor() {
-        this.server = express();
+        this.app = express();
         this.middleware();
         this.router();
     }
 
     private middleware() {
-        this.server.use(express.json());
+        this.app.use(cors())
+        this.app.use(express.json());
     }
 
     private router() {
-        this.server.use(router);
+        this.app.use(router);
     }
 }
 

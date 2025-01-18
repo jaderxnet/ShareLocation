@@ -6,7 +6,7 @@ class FirstController {
     //Create the method home to reponse the home request
     public home(req: Request, res: Response) {
         return res.json({
-            response: 'Hello World2'
+            response: 'Welcome to ShareLocation!'
         });
     }
 }
