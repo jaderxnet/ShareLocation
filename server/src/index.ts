@@ -1,5 +1,4 @@
 //Import app from app.ts
-import { permission } from "process";
 import { App } from "./app"
 //Import socket classes to enable real time 
 //communication between client and server
@@ -20,7 +19,7 @@ const io: Server = new Server(server, {
 })
 
 //When socket have a connection, log de socket id
-io.on('connection', (socket, Socket) => {
+io.on('connection', (socket: Socket) => {
     console.log(`User Connection: ${socket.id}`)
 })
 
@@ -35,12 +34,17 @@ const roomCreator = new Map<string, string>()
 io.on('connection', (socket: CustomSocket) => {
     //Log socket id
     console.log(`User connected: ${socket.id}`)
-
+    // socket create a room
     socket.on('createRoom', (data) => {
+        //Create RoomId from a random number with 5 digits
         const roomId = Math.random().toString(36).substring(2, 7)
+        //join id in the socket
         socket.join(roomId)
+        //Create a variable in socket
         socket.roomId = roomId
+        //Get a total rooms
         const totalRoomUsers = io.sockets.adapter.rooms.get(roomId)
+        //Socket emit a room reate event 
         socket.emit('roomCreated', {
             roomId,
             permission: data.position,
